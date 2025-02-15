@@ -9,7 +9,6 @@ mongoose
     console.log("MongDB connection succeed");
 
     const PORT = process.env.PORT ?? 3003;
-    //app ni listen qilamiz
     app.listen(PORT, () => {
       console.info(`The server is running successfully on port: ${PORT}`);
     });

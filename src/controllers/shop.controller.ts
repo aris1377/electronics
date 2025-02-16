@@ -5,26 +5,49 @@ import MemberService from "../models/Member.service";
 const shopController: T = {};
 shopController.goHome = (req: Request, res: Response) => {
   try {
+    console.log("goHome");
     res.send("HomePage");
   } catch (err) {
     console.error("Error, goHome", err);
   }
 };
 
+shopController.getSignup = (req: Request, res: Response) => {
+  try {
+    console.log("getSignup");
+    res.send("Signup Page");
+  } catch (err) {
+    console.error("Error, getSignup", err);
+  }
+};
+
 shopController.getLogin = (req: Request, res: Response) => {
   try {
+    console.log("getLogin");
     res.send("Login Page");
   } catch (err) {
     console.error("Error, getLogin", err);
   }
 };
 
-shopController.getSignup = (req: Request, res: Response) => {
+shopController.processLogin = (req: Request, res: Response) => {
   try {
-    res.send("Signup Page");
+    console.log("processLogin");
+    res.send("DONE");
   } catch (err) {
-    console.error("Error, getSignup", err);
+    console.error("Error, getLogin", err);
   }
 };
+
+shopController.processSignup = (req: Request, res: Response) => {
+  try {
+    console.log("processSignup");
+    res.send("DONE");
+  } catch (err) {
+    console.error("Error, processSignup", err);
+  }
+};
+
+
 
 export default shopController;

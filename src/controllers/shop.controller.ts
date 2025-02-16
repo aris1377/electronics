@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 
-const toysController: T = {};
-toysController.goHome = (req: Request, res: Response) => {
+const shopController: T = {};
+shopController.goHome = (req: Request, res: Response) => {
   try {
     res.send("HomePage");
   } catch (err) {
@@ -11,7 +11,7 @@ toysController.goHome = (req: Request, res: Response) => {
   }
 };
 
-toysController.getLogin = (req: Request, res: Response) => {
+shopController.getLogin = (req: Request, res: Response) => {
   try {
     res.send("Login Page");
   } catch (err) {
@@ -19,7 +19,7 @@ toysController.getLogin = (req: Request, res: Response) => {
   }
 };
 
-toysController.getSignup = (req: Request, res: Response) => {
+shopController.getSignup = (req: Request, res: Response) => {
   try {
     res.send("Signup Page");
   } catch (err) {
@@ -27,4 +27,4 @@ toysController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-export default toysController;
+export default shopController;

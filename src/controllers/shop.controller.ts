@@ -5,6 +5,7 @@ import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
 const shopController: T = {};
+const memberService = new MemberService();
 shopController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHome");
@@ -32,30 +33,12 @@ shopController.getLogin = (req: Request, res: Response) => {
   }
 };
 
-shopController.processLogin = async (req: Request, res: Response) => {
-  try {
-    console.log("processLogin");
-    console.log("body", req.body);
-    const input: LoginInput = req.body;
-
-    const memberService = new MemberService();
-    const result = await memberService.processLogin(input)
-    
-    res.send(result);
-  } catch (err) {
-    console.error("Error, getLogin", err);
-    res.send(err);
-  }
-};
-
 shopController.processSignup = async (req: Request, res: Response) => {
   try {
     console.log("processSignup");
 
     const newMember: MemberInput = req.body;
     newMember.memberType = MemberType.SHOP;
-
-    const memberService = new MemberService();
     const result = await memberService.processSignup(newMember);
 
     res.send(result);
@@ -64,6 +47,22 @@ shopController.processSignup = async (req: Request, res: Response) => {
     res.send(err);
   }
 };
+
+shopController.processLogin = async (req: Request, res: Response) => {
+  try {
+    console.log("processLogin");
+    console.log("body", req.body);
+    const input: LoginInput = req.body,
+    result = await memberService.processLogin(input)
+    
+    res.send(result);
+  } catch (err) {
+    console.error("Error, getLogin", err);
+    res.send(err);
+  }
+};
+
+
 
 
 

@@ -71,6 +71,18 @@ shopController.processLogin = async (req: AdminRequest, res: Response) => {
   }
 };
 
+shopController.logout = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("logout");
+    req.session.destroy(function () {
+      res.redirect("/admin");
+     })
+  } catch (err) {
+    console.error("Error, logout", err);
+    res.send(err);
+  }
+};
+
 shopController.checkAuthSession = async (req: AdminRequest, res: Response) => {
   try {
     console.log("checkAuthSession");

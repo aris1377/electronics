@@ -11,7 +11,8 @@ routerAdmin
 routerAdmin
     .get("/login", shopController.getLogin)
   .post("/login", shopController.processLogin);
-    
+
+  routerAdmin.get("/logout", shopController.logout);
   routerAdmin.get("/check-me", shopController.checkAuthSession);
 
 /*PRODUCT*/

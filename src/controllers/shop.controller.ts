@@ -13,6 +13,7 @@ shopController.goHome = (req: Request, res: Response) => {
     res.render('home');
   } catch (err) {
     console.error("Error, goHome", err);
+    res.redirect("/admin");
   }
 };
 
@@ -22,6 +23,7 @@ shopController.getSignup = (req: Request, res: Response) => {
     res.render('signup');
   } catch (err) {
     console.error("Error, getSignup", err);
+    res.redirect("/admin");
   }
 };
 
@@ -31,6 +33,7 @@ shopController.getLogin = (req: Request, res: Response) => {
     res.render('login');
   } catch (err) {
     console.error("Error, getLogin", err);
+    res.redirect("/admin");
   }
 };
 
@@ -50,7 +53,11 @@ shopController.processSignup = async (req: AdminRequest, res: Response) => {
 
   } catch (err) {
     console.error("Error, processSignup", err);
-    res.send(err);
+     const message =
+       err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG;
+     res.send(
+       `<script> alert ("${message}"); window.location.replace('admin/signup') </script>`
+     );
   }
 };
 
@@ -67,7 +74,9 @@ shopController.processLogin = async (req: AdminRequest, res: Response) => {
     });
   } catch (err) {
     console.error("Error, getLogin", err);
-    res.send(err);
+    const message = err instanceof Error ? err.message : Message.SOMETHING_WENT_WRONG
+    res.send(
+      `<script> alert ("${message}"); window.location.replace('admin/login') </script>`);
   }
 };
 
@@ -79,7 +88,7 @@ shopController.logout = async (req: AdminRequest, res: Response) => {
      })
   } catch (err) {
     console.error("Error, logout", err);
-    res.send(err);
+   res.redirect("/admin");
   }
 };
 

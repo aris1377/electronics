@@ -3,6 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
+import { Message } from "../libs/Errors";
 
 const shopController: T = {};
 const memberService = new MemberService();
@@ -64,6 +65,20 @@ shopController.processLogin = async (req: AdminRequest, res: Response) => {
     req.session.save(function () {
       res.send(result);
     });
+  } catch (err) {
+    console.error("Error, getLogin", err);
+    res.send(err);
+  }
+};
+
+shopController.checkAuthSession = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("checkAuthSession");
+    if (req.session?.member)
+      res.send(`<script> alert ("${req.session.member.memberNick}")</script>`);
+    else
+      res.send(`<script> alert ("${Message.MOT_AUTHENTICATED}")</script>`);
+    
   } catch (err) {
     console.error("Error, getLogin", err);
     res.send(err);

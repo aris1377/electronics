@@ -3,6 +3,14 @@ export enum ToyGender {
   GIRLS = "girls",
   BOYS = "boys",
 }
+
+export enum ToyType {
+  EDUCATIONAL = "Educational",
+  FUN = "Fun",
+  MUSICAL = "Musical",
+  PUZZLE = "Puzzle",
+}
+
 export enum ToyAgeRange {
   AGE_0_3 = "0-3 years",
   AGE_3_5 = "3-5 years",
@@ -25,6 +33,15 @@ export enum ClothingGender {
   GIRLS = "girls",
   BOYS = "boys",
 }
+
+export enum ClothingType {
+  T_SHIRT = "T-Shirt",
+  PANTS = "Pants",
+  JACKET = "Jacket",
+  HAT = "Hat",
+  SHOES = "Shoes",
+}
+
 export enum ClothingAgeRange {
   AGE_0_3 = "0-3 years",
   AGE_3_5 = "3-5 years",

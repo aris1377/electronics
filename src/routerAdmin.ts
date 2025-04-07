@@ -17,9 +17,21 @@ routerAdmin
   routerAdmin.get("/check-me", shopController.checkAuthSession);
 
 /*PRODUCT*/
-routerAdmin.get("/product/all", productController.getAllProducts);
-routerAdmin.post("/product/create", productController.createNewProduct);
-routerAdmin.post("/product/:id", productController.updateChosenProduct);
+routerAdmin.get(
+  "/product/all",
+  shopController.verifyShop,
+  productController.getAllProducts
+);
+routerAdmin.post(
+  "/product/create",
+  shopController.verifyShop,
+  productController.createNewProduct
+);
+routerAdmin.post(
+  "/product/:id",
+  shopController.verifyShop,
+  productController.updateChosenProduct
+);
 /*USER*/
 
 export default routerAdmin;

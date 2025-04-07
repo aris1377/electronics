@@ -1,7 +1,23 @@
-//Toys
-export enum ToyGender {
+export enum ProductStatus {
+  PAUSE = "PAUSE",
+  PROCESS = "PROCESS",
+  DELETE = "DELETE",
+}
+
+export enum ProductCollection {
+  KIDS_TOYS = "kids_toys",
+  KIDS_CLOTHING = "kids_clothing",
+  KIDS_BOOKS = "kids_books",
+}
+export enum ProductGender  {
   GIRLS = "girls",
   BOYS = "boys",
+}
+
+export enum ProductAge {
+  AGE_0_3 = "0-3 years",
+  AGE_3_5 = "3-5 years",
+  AGE_6_7 = "6-7 years",
 }
 
 export enum ToyType {
@@ -11,11 +27,6 @@ export enum ToyType {
   PUZZLE = "Puzzle",
 }
 
-export enum ToyAgeRange {
-  AGE_0_3 = "0-3 years",
-  AGE_3_5 = "3-5 years",
-  AGE_6_7 = "6-7 years",
-}
 export enum ToySize {
   ML = "ML",
   M = "M",
@@ -29,11 +40,6 @@ export enum ToyColor {
   ORANGE = "orange",
 }
 //Kids Clothing
-export enum ClothingGender {
-  GIRLS = "girls",
-  BOYS = "boys",
-}
-
 export enum ClothingType {
   T_SHIRT = "T-Shirt",
   PANTS = "Pants",
@@ -42,11 +48,6 @@ export enum ClothingType {
   SHOES = "Shoes",
 }
 
-export enum ClothingAgeRange {
-  AGE_0_3 = "0-3 years",
-  AGE_3_5 = "3-5 years",
-  AGE_6_7 = "6-7 years",
-}
 export enum ClothingSize {
   XS = "XS",
   S = "S",
@@ -75,13 +76,6 @@ export enum ClothingColorForGirls {
    EDUCATIONAL = "Educational",
    COLORING = "Coloring",
    PUZZLE = "Puzzle",
- }
-
- export enum BookAgeRange {
-   AGE_0_3 = "0-3 years",
-   AGE_3_5 = "3-5 years",
-   AGE_6_7 = "6-7 years",
-   AGE_8_PLUS = "8+ years",
  }
 
  export enum BookLanguage {

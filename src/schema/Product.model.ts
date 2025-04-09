@@ -1,7 +1,8 @@
 import {
   BookCategory, BookCoverType,
-  BookLanguage, ClothingColorForBoys,
-  ClothingColorForGirls, ClothingSize,
+   BookLanguage,
+   ClothingColor,
+   ClothingSize,
   ClothingType, ProductAge, ProductCollection,
   ProductGender, ProductStatus, ToyColor, ToySize, ToyType
 } from "./../libs/enums/product.enum";
@@ -25,73 +26,67 @@ const productSchema = new Schema(
     productGender: {
       type: String,
       enum: ProductGender,
-      required: true,
+      required: false,
     },
 
-    ProductAge: {
-      type: Number,
+    productAgeRange: {
+      type: String,
       enum: ProductAge,
-      required: true,
+      required: false,
     },
 
-    toyType: {
+    productToyType: {
       type: String,
       enum: ToyType,
-      required: true,
+      required: false,
     },
 
-    toySize: {
+    productToySize: {
       type: String,
       enum: ToySize,
-      required: true,
+      required: false,
     },
 
-    toyColor: {
+    productToyColor: {
       type: String,
       enum: ToyColor,
-      required: true,
+      required: false,
     },
 
-    clothingType: {
+    productClothingType: {
       type: String,
       enum: ClothingType,
-      required: true,
+      required: false,
     },
 
-    clothingSize: {
+    productClothingSize: {
       type: String,
       enum: ClothingSize,
-      required: true,
+      required: false,
     },
 
-    clothingColorForBoys: {
+    productClothingColor: {
       type: String,
-      enum: ClothingColorForBoys,
-      required: true,
+      enum: ClothingColor,
+      required: false,
     },
 
-    clothingColorForGirls: {
-      type: String,
-      enum: ClothingColorForGirls,
-      required: true,
-    },
-
-    bookCategory: {
+    productBookType: {
       type: String,
       enum: BookCategory,
-      required: true,
+      required: false,
     },
 
-    bookLanguage: {
+    productBookLanguage: {
       type: String,
       enum: BookLanguage,
-      required: true,
+      required: false,
     },
 
-    bookCoverType: {
+    productBookCoverType: {
       type: String,
       enum: BookCoverType,
-      required: true,
+      required: false,
     },
 
     productName: {
@@ -125,7 +120,7 @@ const productSchema = new Schema(
   { timestamps: true } //updatedAt, createdAt
 );
 productSchema.index(
-  { productName: 1, productSize: 1, productCollection: 1 },
+  { productName: 1, productCollection: 1 },
   { unique: true }
 );
 export default mongoose.model("Product", productSchema);

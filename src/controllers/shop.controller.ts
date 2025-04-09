@@ -76,7 +76,7 @@ shopController.processLogin = async (req: AdminRequest, res: Response) => {
     //sessions
     req.session.member = result;
     req.session.save(function () {
-      res.send(result);
+     res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.error("Error, getLogin", err);

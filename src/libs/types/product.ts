@@ -1,52 +1,71 @@
 import { Types } from "mongoose";
 import {
  BookCategory, BookCoverType,
-  BookLanguage, ClothingColorForBoys,
-  ClothingColorForGirls, ClothingSize,
-  ClothingType, ProductAge, ProductGender, ProductStatus, ToyColor,
+  BookLanguage,  ClothingColor,  ClothingSize,
+  ClothingType, ProductAge, ProductCollection, ProductGender, ProductStatus, ToyColor,
   ToySize, ToyType
 } from "../enums/product.enum";
 
-// Common Product Base
-export interface BaseProduct {
+
+export interface Product {
   _id: Types.ObjectId;
-  ProductStatus: ProductStatus;
+  productStatus: ProductStatus;
+  productCollection: ProductCollection;
+  productGender: ProductGender;
+  productAgeRange: ProductAge;
+
+  // Toy
+  productToyType?: ToyType;
+  productToyColor?: ToyColor;
+  productToySize?: ToySize;
+
+  // Clothing
+  productClothingType?: ClothingType;
+  productClothingSize?: ClothingSize;
+  productClothingColor?: ClothingColor;
+
+  // Book
+  productBookType?: BookCategory;
+  productBookLanguage?: BookLanguage;
+  productBookCoverType?: BookCoverType;
+
   productName: string;
   productPrice: number;
   productLeftCount: number;
-  productDescription?: string;
-  productViews: number;
+  productDesc?: string;
   productImages: string[];
+  productViews: number;
   createdAt: Date;
   updatedAt: Date;
 }
 
-// Toy Product
-export interface ToyProduct extends BaseProduct {
-  productCategory: "toy";
-  productGender: ProductGender;
-  productType: ToyType;
-  productAgeRange: ProductAge;
-  productSize: ToySize;
-  productColor: ToyColor;
-}
 
-// Clothing Product
-export interface ClothingProduct extends BaseProduct {
-  productCategory: "clothing";
+export interface ProductInput {
+  productStatus?: ProductStatus;
+  productCollection: ProductCollection;
   productGender: ProductGender;
-  productType: ClothingType;
   productAgeRange: ProductAge;
-  productSize: ClothingSize;
-  productColor: ClothingColorForBoys | ClothingColorForGirls;
-}
 
-// Book Product
-export interface BookProduct extends BaseProduct {
-  productCategory: "book";
-  productType: BookCategory;
-  productAgeRange: ProductAge;
-  productLanguage: BookLanguage;
-  productCoverType: BookCoverType;
+  // Toy-related (optional if not toy)
+  productToyType?: ToyType;
+  productToyColor?: ToyColor;
+  productToySize?: ToySize;
+
+  // Clothing-related (optional if not clothing)
+  productClothingType?: ClothingType;
+  productClothingSize?: ClothingSize;
+  productClothingColor?: ClothingColor;
+
+  // Book-related (optional if not book)
+  productBookType?: BookCategory;
+  productBookLanguage?: BookLanguage;
+  productBookCoverType?: BookCoverType;
+
+  productName: string;
+  productPrice: number;
+  productLeftCount: number;
+  productDesc?: string;
+  productImages?: string[];
+  productViews?: number;
 }
 

@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
-import { Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const shopController: T = {};
 const memberService = new MemberService();
@@ -40,15 +40,21 @@ shopController.getLogin = (req: Request, res: Response) => {
 shopController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processSignup");
-
+    console.log("req.body:", req.body);
+    const file = req.file;
+    console.log("processSignup:", file);
+  
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
     const newMember: MemberInput = req.body;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.SHOP;
     const result = await memberService.processSignup(newMember);
     //sessions
 
     req.session.member = result;
     req.session.save(function () {
-       res.send(result);
+        res.redirect("/admin/product/all");
     });
 
   } catch (err) {

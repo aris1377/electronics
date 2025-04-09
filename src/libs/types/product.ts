@@ -45,25 +45,47 @@ export interface ProductInput {
   productCollection: ProductCollection;
   productGender: ProductGender;
   productAgeRange: ProductAge;
-
   // Toy-related (optional if not toy)
   productToyType?: ToyType;
   productToyColor?: ToyColor;
   productToySize?: ToySize;
-
   // Clothing-related (optional if not clothing)
   productClothingType?: ClothingType;
   productClothingSize?: ClothingSize;
   productClothingColor?: ClothingColor;
-
   // Book-related (optional if not book)
   productBookType?: BookCategory;
   productBookLanguage?: BookLanguage;
   productBookCoverType?: BookCoverType;
-
   productName: string;
   productPrice: number;
   productLeftCount: number;
+  productDesc?: string;
+  productImages?: string[];
+  productViews?: number;
+}
+
+export interface ProductUpdateInput {
+  _id: Types.ObjectId;
+  productStatus?: ProductStatus;
+  productCollection?: ProductCollection;
+  productGender?: ProductGender;
+  productAgeRange?: ProductAge;
+  // Toy-related (optional if not toy)
+  productToyType?: ToyType;
+  productToyColor?: ToyColor;
+  productToySize?: ToySize;
+  // Clothing-related (optional if not clothing)
+  productClothingType?: ClothingType;
+  productClothingSize?: ClothingSize;
+  productClothingColor?: ClothingColor;
+  // Book-related (optional if not book)
+  productBookType?: BookCategory;
+  productBookLanguage?: BookLanguage;
+  productBookCoverType?: BookCoverType;
+  productName?: string;
+  productPrice?: number;
+  productLeftCount?: number;
   productDesc?: string;
   productImages?: string[];
   productViews?: number;

@@ -85,6 +85,6 @@ export enum ClothingColor {
  }
 
  export enum BookCoverType {
-   HARD = "Hard Cover",
-   SOFT = "Soft Cover",
+   HARD = "Hard_Cover",
+   SOFT = "Soft_Cover",
  }

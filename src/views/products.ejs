@@ -52,10 +52,6 @@
               <td><%= value.productCollection %></td>
               <td><%= value.productGender %></td>
               <td><%= value.productAgeRange %></td>
-               <td>
-                <%= value.productCollection === 'KIDS_TOYS' ? value.productToySize
-                :value.productClothingSize %>
-              </td>
               <td><%= value.productPrice %></td>
               <td><%= value.productLeftCount %></td>
               <td>
@@ -78,7 +74,8 @@
             </button>
           </div>
         </div>
-        <form
+         <form
+        onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
           class="dish-container"
@@ -128,36 +125,111 @@
             <div class="half-input">
               <label>Product Type</label>
               <select class="product-collection" name="productCollection">
-                <option value="DISH" selected>Dish</option>
-                <option value="SALAD">Salad</option>
-                <option value="DESSERT">Dessert</option>
-                <option value="DRINK">Drink</option>
+                <option value="KIDS_TOYS" selected>KIDS-TOYS</option>
+                <option value="BOOKS">BOOKS</option>
+                <option value="CLOTHING">CLOTHING</option>
                 <option value="OTHER">Other</option>
               </select>
             </div>
+                  <!-- Product Gender -->
+                <div class="half-input">
+                  <label>Product Gender</label>
+                  <select class="product-collection" name="productGender">
+                    <option value="GIRLS" selected>GIRLS</option>
+                    <option value="BOYS">BOYS</option>
+                    <option value="UNISEX">UNISEX</option>
+                  </select>
+                </div>
 
-            <div class="half-input" id="product-collection">
-              <label>Dish Volume</label>
-              <select class="product-size" name="productSize">
-                <option value="SMALL">Small</option>
-                <option value="NORMAL" selected>Normal</option>
-                <option value="LARGE">Large</option>
-                <option value="SET">Set</option>
-              </select>
-            </div>
+                <!-- Product Age Range -->
+                <div class="half-input">
+                  <label>Product Age Range</label>
+                  <select class="product-collection" name="productAgeRange">
+                    <option value="AGE_0_3" selected>AGE_0_3</option>
+                    <option value="AGE_3_5">AGE_3_5</option>
+                    <option value="AGE_6_7">AGE_6_7</option>
+                    <option value="AGE_8_10">AGE_8_10</option>
+                  </select>
+                </div>
 
-            <div class="half-input" id="product-volume" style="display: none">
-              <label>Drink Volume</label>
-              <select class="product-volume" name="productVolume">
-                <option value="0.5">0,5 liters</option>
-                <option value="1" selected>1 liters</option>
-                <option value="1.2">1,2 liters</option>
-                <option value="1.5">1,5 liters</option>
-                <option value="2">2 liters</option>
-              </select>
-            </div>
-          </div>
-          <div class="long-input">
+                <!-- Toy Type -->
+                <div class="half-input">
+                  <label>Toy Type</label>
+                  <select class="product-collection" name="toyType">
+                    <option value="EDUCATIONAL" selected>EDUCATIONAL</option>
+                    <option value="FUN">FUN</option>
+                    <option value="MUSICAL">MUSICAL</option>
+                    <option value="PUZZLE">PUZZLE</option>
+                  </select>
+                </div>
+
+                <!-- Toy Color -->
+                <div class="half-input">
+                  <label>Toy Color</label>
+                  <select class="product-collection" name="toyColor">
+                    <option value="RED" selected>RED</option>
+                    <option value="BLUE">BLUE</option>
+                    <option value="SKY_BLUE">SKY_BLUE</option>
+                    <option value="ORANGE">ORANGE</option>
+                  </select>
+                </div>
+
+
+                <!-- Clothing Size -->
+                <div class="half-input">
+                  <label>Clothing Size</label>
+                  <select class="product-collection" name="clothingSize">
+                    <option value="XS">XS</option>
+                    <option value="S" selected>S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                  </select>
+                </div>
+
+                <!-- Clothing Color -->
+                <div class="half-input">
+                  <label>Clothing Color</label>
+                  <select class="product-collection" name="clothingColor">
+                    <option value="BLUE">BLUE</option>
+                    <option value="GRAY" selected>GRAY</option>
+                    <option value="GREEN">GREEN</option>
+                    <option value="YELLOW">YELLOW</option>
+                    <option value="RED">RED</option>
+                    <option value="ORANGE">ORANGE</option>
+                    <option value="PINK">PINK</option>
+                    <option value="WHITE">WHITE</option>
+                    <option value="PURPLE">PURPLE</option>
+                    <option value="GOLD">GOLD</option>
+                    <option value="PEACH">PEACH</option>
+                  </select>
+                </div>
+
+                <!-- Book Language -->
+                <div class="half-input">
+                  <label>Book Language</label>
+                  <select class="product-collection" name="bookLanguage">
+                    <option value="UZBEK">UZBEK</option>
+                    <option value="RUSSIAN" selected>RUSSIAN</option>
+                    <option value="ENGLISH">ENGLISH</option>
+                    <option value="KOREAN">KOREAN</option>
+                  </select>
+                </div>
+
+                <!-- Book Cover Type -->
+                <div class="half-input">
+                  <label>Book Cover Type</label>
+                  <select class="product-collection" name="bookCoverType">
+                    <option value="HARD">Hard Cover</option>
+                    <option value="SOFT" selected>Soft Cover</option>
+                  </select>
+                </div>
+
+
+            
+
+              </div>
+              <div class="long-input">
             <label>Product Description</label>
             <textarea name="productDesc" class="product-desc"></textarea>
           </div>

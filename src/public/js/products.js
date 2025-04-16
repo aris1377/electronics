@@ -1,6 +1,4 @@
-// DOM fully loaded bo'lgandan keyin barcha JavaScript ishga tushadi
 document.addEventListener("DOMContentLoaded", function () {
-  // DOM elementlarini tanlab olish
   const processBtn = document.getElementById("process-btn");
   const cancelBtn = document.getElementById("cancel-btn");
   const dishContainer = document.querySelector(".dish-container");
@@ -9,40 +7,29 @@ document.addEventListener("DOMContentLoaded", function () {
     "select[name='productCollection']"
   );
 
-  // Tasvir yuklash funksiyalari
   setupImageUploads();
 
-  // Product yaratish formasi dastlab yashirin
   dishContainer.style.display = "none";
 
-  // Yangi mahsulot qo'shish buttonini bosish
   processBtn.addEventListener("click", function () {
     dishContainer.style.display = "block";
-    // Formaga scroll qilish
     dishContainer.scrollIntoView({ behavior: "smooth" });
   });
 
-  // Cancel buttonini bosish
   cancelBtn.addEventListener("click", function (e) {
     e.preventDefault();
     dishContainer.style.display = "none";
-    // Formani tozalash
     clearForm();
-    // Yuqoriga scroll qilish
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  // Mahsulot turini tanlash orqali ko'rinadigan inputlarni o'zgartirish
   if (productTypeSelect) {
     productTypeSelect.addEventListener("change", function () {
       toggleFieldsByProductType(this.value);
     });
-
-    // Sahifa yuklanganida ham ishlaydi - dastlabki tanlangan qiymatga qarab
     toggleFieldsByProductType(productTypeSelect.value);
   }
 
-  // Mahsulot statusini o'zgartirish
   dishStatusSelects.forEach((select) => {
     select.addEventListener("change", function () {
       const productId = this.id;
@@ -131,46 +118,42 @@ function toggleFieldsByProductType(type) {
       '.half-input:has(select[name="toyColor"]), ' +
       '.half-input:has(select[name="productToySize"]), ' +
       '.half-input:has(select[name="clothingSize"]), ' +
+      '.half-input:has(select[name="productClothingSize"]), ' + // <-- bu qo‘shildi
       '.half-input:has(select[name="clothingColor"]), ' +
       '.half-input:has(select[name="bookLanguage"]), ' +
       '.half-input:has(select[name="bookCoverType"])'
   );
 
-  // Modern browserlarda :has selector ishlamasligi mumkin, shuning uchun alternativ variant
-  if (allSpecificFieldContainers.length === 0) {
-    // Barcha .half-input elementlarini tekshirib chiqamiz
-    const allHalfInputs = document.querySelectorAll(".half-input");
-    allHalfInputs.forEach((container) => {
-      // Har bir konteynerda bitta select mavjud deb taxmin qilamiz
-      const selectElement = container.querySelector("select");
-      if (selectElement) {
-        const name = selectElement.getAttribute("name");
-        // Bizning mahsus maydonlardan biri ekanligini tekshiramiz
-        if (
-          [
-            "toyType",
-            "toyColor",
-            "productToySize",
-            "clothingSize",
-            "clothingColor",
-            "bookLanguage",
-            "bookCoverType",
-          ].includes(name)
-        ) {
-          container.style.display = "none";
-        }
-      }
-    });
-  } else {
-    allSpecificFieldContainers.forEach((container) => {
-      container.style.display = "none";
-    });
-  }
+   if (allSpecificFieldContainers.length === 0) {
+     const allHalfInputs = document.querySelectorAll(".half-input");
+     allHalfInputs.forEach((container) => {
+       const selectElement = container.querySelector("select");
+       if (selectElement) {
+         const name = selectElement.getAttribute("name");
+         if (
+           [
+             "toyType",
+             "toyColor",
+             "productToySize",
+             "clothingSize",
+             "productClothingSize", // <-- bu qo‘shildi
+             "clothingColor",
+             "bookLanguage",
+             "bookCoverType",
+           ].includes(name)
+         ) {
+           container.style.display = "none";
+         }
+       }
+     });
+   } else {
+     allSpecificFieldContainers.forEach((container) => {
+       container.style.display = "none";
+     });
+   }
 
-  // Tanlangan turga qarab kerakli maydonlarni ko'rsatish
   switch (type) {
     case "KIDS_TOYS":
-      // O'yinchoqlar uchun kerakli maydonlarni ko'rsatish
       showFieldByName("toyType");
       showFieldByName("toyColor");
       showFieldByName("productToySize");
@@ -178,8 +161,7 @@ function toggleFieldsByProductType(type) {
       break;
 
     case "CLOTHING":
-      // Kiyimlar uchun kerakli maydonlarni ko'rsatish
-      showFieldByName("clothingSize");
+      showFieldByName("productClothingSize");
       showFieldByName("clothingColor");
       console.log("Showing clothing fields");
       break;
@@ -215,39 +197,25 @@ function showFieldByName(fieldName) {
 }
 
 // Mahsulot statusini yangilash
-function updateProductStatus(productId, newStatus) {
-  // AJAX so'rov yasash
-  fetch("/admin/product/update-status", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id: productId,
-      status: newStatus,
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Status update failed");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Status updated successfully:", data);
-      // Agar status DELETE bo'lsa, elementni ko'rinishini o'zgartirish
-      if (newStatus === "DELETE") {
-        const row = document.getElementById(productId).closest("tbody");
-        if (row) {
-          row.style.opacity = "0.5";
-        }
-      }
-    })
-    .catch((error) => {
-      console.error("Error updating status:", error);
-      alert("Error updating product status. Please try again.");
-    });
-}
+ $(".new-product-status").on("change", async function (e) {
+    const id = e.target.id;
+    const productStatus = $(`#${id}.new-product-status`).val();
+
+    try {
+      const response = await axios.post(`/admin/product/${id}`, {
+        productStatus: productStatus,
+      });
+      console.log("response:", response);
+      const result = response.data;
+      if (result.data) {
+        $(".new-product-status").blur();
+      } else alert("Product update failed!");
+    } catch (err) {
+      console.log(err);
+      alert("Product update failed!");
+    }
+  });
+
 
 // Tasvir yuklash uchun funksiya
 function setupImageUploads() {

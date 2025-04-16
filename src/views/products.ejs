@@ -39,30 +39,44 @@
                 <th scope="col">Product Type</th>
                 <th scope="col">Product Gender</th>
                 <th scope="col">Product Age</th>
+                <th scope="col">Product Size</th>
                 <th scope="col">Product Price</th>
                 <th scope="col">Product Left Count</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
-            <% products.map(function(value,key){ %>
-            <tbody style="background: white">
-               <td><%= key + 1 %></td>
-              <td><%= value.productName %></td>
-              <td><%= value.productCollection %></td>
-              <td><%= value.productGender %></td>
-              <td><%= value.productAgeRange %></td>
-              <td><%= value.productPrice %></td>
-              <td><%= value.productLeftCount %></td>
-              <td>
-                <select class="spec-select new-product-status" id="<%= value._id %>">
-                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected': '' %> >PAUSE</option>
-                  <option value="PROCESS"<%= value.productStatus === 'PROCESS' ? 'selected': '' %> >PROCESS</option>
-                  <option value="DELETE"<%= value.productStatus === 'DELETE' ? 'selected': '' %> >DELETE</option>
-                </select>
-              </td>
-            </tbody>
+           <% products.map(function(value, key) { %>
+              <tbody style="background: white">
+                <tr>
+                  <td><%= key + 1 %></td>
+                  <td><%= value.productName %></td>
+                  <td><%= value.productCollection %></td>
+                  <td><%= value.productGender %></td>
+                  <td><%= value.productAgeRange %></td>
+
+                <% if (value.productCollection === 'CLOTHING') { %>
+                    <td><%= value.productClothingSize %></td>
+                  <% } else if (value.productCollection === 'KIDS_TOYS') { %>
+                    <td><%= value.productToySize %></td>
+                  <% } else { %>
+                    <td>-</td> <!-- yoki bo'sh <td></td> -->
+                  <% } %>
+
+
+                  <td><%= value.productPrice %></td>
+                  <td><%= value.productLeftCount %></td>
+                  <td>
+                    <select class="spec-select new-product-status" id="<%= value._id %>">
+                      <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                      <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                      <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
             <% }) %>
+
             <!--  LOOP PRODUCTS: END  -->
           </table>
           <div
@@ -111,6 +125,8 @@
                 class="product-price"
               />
             </div>
+
+            
             <div class="half-input">
               <label>Product Left Counts</label>
               <input
@@ -123,7 +139,7 @@
           </div>
           <div class="half-input-frame">
             <div class="half-input">
-              <label>Product Type</label>
+              <label>Product Collection</label>
               <select class="product-collection" name="productCollection">
                 <option value="KIDS_TOYS" selected>KIDS-TOYS</option>
                 <option value="BOOKS">BOOKS</option>
@@ -137,7 +153,6 @@
                   <select class="product-collection" name="productGender">
                     <option value="GIRLS" selected>GIRLS</option>
                     <option value="BOYS">BOYS</option>
-                    <option value="UNISEX">UNISEX</option>
                   </select>
                 </div>
 
@@ -174,16 +189,12 @@
                   </select>
                 </div>
 
-
-                <!-- Clothing Size -->
                 <div class="half-input">
-                  <label>Clothing Size</label>
-                  <select class="product-collection" name="clothingSize">
-                    <option value="XS">XS</option>
-                    <option value="S" selected>S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
+                  <label>Toy Size</label>
+                  <select class="product-collection" name="productToySize">
+                    <option value="SMALL" selected>SMALL</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LARGE">LARGE</option>
                   </select>
                 </div>
 
@@ -202,6 +213,17 @@
                     <option value="PURPLE">PURPLE</option>
                     <option value="GOLD">GOLD</option>
                     <option value="PEACH">PEACH</option>
+                  </select>
+                </div>
+
+                 <div class="half-input">
+                  <label>Clothing Size</label>
+                  <select class="product-collection" name="productClothingSize">
+                    <option value="XS" selected>XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
                   </select>
                 </div>
 
@@ -225,9 +247,7 @@
                   </select>
                 </div>
 
-
-            
-
+  
               </div>
               <div class="long-input">
             <label>Product Description</label>

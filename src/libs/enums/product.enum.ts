@@ -29,10 +29,9 @@ export enum ToyType {
 }
 
 export enum ToySize {
-  ML = "ML",
-  M = "M",
-  L = "L",
-  S = "S",
+  SMALL = "SMALL",
+  MEDIUM = "MEDIUM",
+  LARGE = "LARGE",
 }
 export enum ToyColor {
   RED = "RED",

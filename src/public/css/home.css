@@ -1,12 +1,16 @@
 .home-container {
   position: relative;
-  width: auto;
-  height: auto;
-  min-height: 100%;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(-45deg, #110303f0, #dd6d04, #011c1afc, #7a6868);
+  background-image: url('/img/play.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: gradientMove 15s ease infinite;
+  font-family: 'Poppins', sans-serif;
 }
 
 .home-container a {
@@ -15,7 +19,7 @@
 }
 
 .home-container .nav-item a {
-  color: #e3c08d;
+  color: #130000;
 }
 
 .home-container .nav-item a.disabled {

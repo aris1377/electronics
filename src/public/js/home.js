@@ -33,7 +33,7 @@ function fitElementToParent(el, padding) {
           anime({
             targets: spherePathEls[i],
             stroke: {
-              value: ["rgba(255,75,75,1)", "rgba(80,80,80,.35)"],
+              value: ["rgba(255,255,255,1)", "rgba(255,255,255,0.35)"],
               duration: 500,
             },
             translateX: [2, -4],

@@ -35,7 +35,7 @@ class AuthService {
   }
 
 
-  public async ckeckAuth(token: string): Promise<Member> {
+  public async checkAuth(token: string): Promise<Member> {
     const result: Member = (await jwt.verify(
       token,
       this.secretToken

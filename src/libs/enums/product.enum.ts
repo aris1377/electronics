@@ -19,6 +19,7 @@ export enum ProductAge {
   AGE_0_3 = "AGE_0_3",
   AGE_3_5 = "AGE_3_5",
   AGE_6_7 = "AGE_6_7",
+  AGE_8_10 = "AGE_8_10",
 }
 
 export enum ToyType {
